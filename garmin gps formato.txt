@@ -38,3 +38,45 @@ Long: ddd + dd.dddd: 000 + (58.4350 / 60) 0.9739
 Long: ddd.dddd: 000.9739
 
 Long: -000.9739 (As this is west it is negative, east is positive)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+$GPGGA,170243.00,3401.20701,N,11824.6820,W,1,06,2.14,70.9,M,-32.9,M,,*51
+
+Notice that latitude is 3401.20701 while longitude is 11824.68206. This is not the floating-point decimal (##.######) format used in the White House example shown above. Rather, GPGGA, as well as other GPS sentence structures, use the dddmm.mmmm format for latitude and the dddmm.mmmm for longitude.
+
+At first glance, you might think that the ddmm.mmmm and dddmm.mmmm formats represent a numeric value, but they do not. Rather these formats are a concatenation of numerals in which the position of each digit has a specific meaning.
+
+In the ddmm.mmmm and dddmm.mmmm formats the dd and ddd digits indicate degrees. The mm.mmmm digits indicate the minute and fraction of a minute. Thus, the latitude expressed as 3401.21189 in ddmm.mmmn format, translates into 34.020196 in ##.##### format.
+
+For those readers that like this sort of detail, Listing 2 below shows the conversion logic for the latitude 3401.21189 and longitude 11824.67797, from the ddmm.mmmm and dddmm.mmmm formats to standard decimal values.
+
+Format
+
+Value
+
+Conversion logic
+
+Result
+
+ddmm.mmmm
+
+3401.21189
+
+34 + (01.21189 / 60)
+
+34.020196
+
+dddmm.mmmm
+
+11824.67797
+
+118 + (24.67797 / 60)
+
+118.41129833
+
+Listing 2: Converting GPS latitude and longitude represented in ddmm.mmmm and dddmm.mmmm formats to standard decimal values.
+
+For those architects designing mobile systems, identifying the standard by which to represent and consume GPS data is an important determination, particularly when you’re passing data between systems and microservices. Developers writing programs that analyze GPGGA sentences or any of the other various GPS sentence formats will need to accommodate how latitude and longitude data are formatted. It can be a bit of a chore in terms of parsing.
+
+The long and short of it is that you need to be aware of field formats when working with a specific GPS sentence.
