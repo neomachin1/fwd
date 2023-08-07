@@ -1,0 +1,40 @@
+GPS Location Integration into Google Maps
+The GNSS enabled family of Siretta Industrial Modems provide GPS position information in the Decimal Minutes format which is presented as ddmm.mmmm for latitude and dddmm.mmmm for longitude. When integrating in to your application using Google Maps to display your position you must provide the information in the Decimal Degrees format which is presented as dd.dddd for latitude and dd.dddd for longitude.
+
+The AT command AT$GPSACP will return the lat/long position information in the Decimal Minutes format:
+
+GPSACP lat is in the format ddmm.mmmm
+GPSACP lon is in the format dddmm.mmmm
+
+Position Information Conversion
+This position information can easily be converted into Google Maps compatible lat/long readings as shown below:
+
+Strip the dd from the message i.e.
+
+ddmm.mmmm
+
+Which becomes
+
+variable1 = dd
+variable2 = mm.mmmm
+variable3 = variable2 / 60
+
+Rejoin values to make dd.dddd
+
+dd.dddd = variable1.variable3
+
+i.e. Latitude / Longitude for the Siretta office from NMEA GGA message to lat/lon!
+
+Lat: ddmm.mmmm: 5123.1355 (N)
+Lat: dd + mm.mmmm: 51 + 23.1355
+Lat: dd + dd.dddd: 51 + (23.1355 / 60) 0.38559
+Lat: dd.dddd: 51.38559
+
+Lat: 51.38559 (As this is north it is positive, south is negative)
+
+Long: dddmm.mmmm: 00058.4350 (W)
+Long: ddd + mm.mmmm: 000 + 58.4350
+Long: ddd + dd.dddd: 000 + (58.4350 / 60) 0.9739
+Long: ddd.dddd: 000.9739
+
+Long: -000.9739 (As this is west it is negative, east is positive)
