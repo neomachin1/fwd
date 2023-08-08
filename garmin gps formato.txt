@@ -80,3 +80,14 @@ Listing 2: Converting GPS latitude and longitude represented in ddmm.mmmm and dd
 For those architects designing mobile systems, identifying the standard by which to represent and consume GPS data is an important determination, particularly when you’re passing data between systems and microservices. Developers writing programs that analyze GPGGA sentences or any of the other various GPS sentence formats will need to accommodate how latitude and longitude data are formatted. It can be a bit of a chore in terms of parsing.
 
 The long and short of it is that you need to be aware of field formats when working with a specific GPS sentence.
+---------------------------------------------------------------------------------------------------------------------3
+https://davidpardavila.com/como-convertir-coordenadas-geograficas/
+
+
+
+
+
+
+
+
+
